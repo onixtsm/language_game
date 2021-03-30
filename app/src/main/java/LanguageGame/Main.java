@@ -16,7 +16,7 @@ public class Main {
 //        for (WordTranslationDataType data : list) {
 //            System.out.println(data);
 //        }
-	var dt = Output.random(list);
+	var dt = writer.random(list);
 	writer.question(dt);
 
     }
