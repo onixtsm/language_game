@@ -1,7 +1,7 @@
 package LanguageGame;
 
 import LanguageGame.parser.*;
-
+import LanguageGame.writer.*;
 import java.io.File;
 
 public class Main {
@@ -13,8 +13,11 @@ public class Main {
         var file = Main.class.getClassLoader().getResource("words.csv").getFile();
         var list = parser.parseFile(new File(file));
 
-        for (WordTranslationDataType data : list) {
-            System.out.println(data);
-        }
+//        for (WordTranslationDataType data : list) {
+//            System.out.println(data);
+//        }
+	var dt = Output.random(list);
+	writer.question(dt);
+
     }
 }
