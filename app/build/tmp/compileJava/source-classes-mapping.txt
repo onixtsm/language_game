@@ -1,0 +1,8 @@
+LanguageGame/parser/CsvParser.java
+ LanguageGame.parser.CsvParser
+LanguageGame/Main.java
+ LanguageGame.Main
+LanguageGame/parser/WordTranslationDataType.java
+ LanguageGame.parser.WordTranslationDataType
+LanguageGame/writer/Output.java
+ LanguageGame.writer.Output

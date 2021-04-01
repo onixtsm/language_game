@@ -36,13 +36,18 @@ public class CsvParser {
 
 	private WordTranslationDataType map(String[] line) {
 		String source = line[0];
-		String translated = line[1];
-		String type = line[2];
+		String[] translated = line[1].split("(;)|(,)");
+		String[] type = line[2].split("(;)|(,)");
 		var to = new WordTranslationDataType();
 
 	        to.setSourceLanguage(source);
-        	to.setTranslationLanguage(translated);
-        	to.setWordType(type);
+
+		for (String s : translated) {
+        		to.setTranslationLanguage(s);
+		}
+		for (String s : type) {
+        		to.setWordType(s);
+		}
 
 		return to;
 	}
