@@ -3,8 +3,12 @@ package LanguageGame.writer;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashSet;
 
+import LanguageGame.sharedInstances.ScannerSingleton;
 import LanguageGame.parser.WordTranslationDataType;
+import LanguageGame.start.Menu;
 
 public class Output {
 
@@ -16,45 +20,35 @@ public class Output {
 
         private void question(WordTranslationDataType dt) {
                 String rus = dt.getSourceLanguage();
-                List<String> eng = dt.getTranslationLanguage();
-                List<String> wt = dt.getWordType();
+                List<String> eng = new ArrayList<String>();
+                List<String> wt = new ArrayList<String>();
 
-                Scanner scanner = new Scanner(System.in);
+                eng = dt.getTranslationLanguage();
+                wt = dt.getWordType();
 
-                System.out.println("Translate this word - " + rus);
-                String answer = scanner.nextLine();
-                int i = 1;
-                for (String s : eng) {
-                        if (answer == s) {
+                var userAnswer = new HashSet<String>();
+                Scanner scanner = ScannerSingleton.getInstance();
+                String answer;
+                while (eng.size() > userAnswer.size()) {
+
+                        System.out.println("Translate this word - " + rus);
+                        answer = scanner.nextLine();
+                        System.out.println(answer);
+
+                        if (userAnswer.contains(answer)) {
+                                System.out.println("Duplicate!");
+                                continue;
+                        }
+
+                        if (eng.contains(answer)) {
+                                userAnswer.add(answer);
                                 System.out.println("Correct");
-                                if (i == eng.size()) {
-                                        System.out.println("Write wrod type");
-                                        answer = scanner.next();
-                                        int j = 0;
-                                        for (String w : wt) {
-                                                if (answer == s) {
-                                                        if (j == wt.size()) {
-                                                                System.out.println("Nice");
-                                                        } else {
-                                                                System.out.println("Write anotherone");
-                                                                answer = scanner.next();
-
-                                                        }
-                                                } else {
-                                                        System.out.println("Incorrect");
-                                                }
-                                                j++;
-                                        }
-                                } else {
-                                        System.out.println("Write anotherone");
-                                        answer = scanner.next();
-                                }
                         } else {
                                 System.out.println("Incorrect");
+                                return;
                         }
-                        i++;
-
                 }
+
         }
 
         public void asklisted(List<WordTranslationDataType> list) {
