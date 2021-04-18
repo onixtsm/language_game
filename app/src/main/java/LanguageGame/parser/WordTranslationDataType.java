@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class WordTranslationDataType {
 
-        private String sourceLanguage;
+        private List<String> sourceLanguage = new ArrayList<>();
         private List<String> translationLanguage = new ArrayList<>();
         private List<String> wordType = new ArrayList<>();
 
@@ -18,5 +18,9 @@ public class WordTranslationDataType {
 
         public void setWordType(String s) {
                 this.wordType.add(s.strip());
+        }
+
+        public void setSourceLanguage(String s) {
+                this.sourceLanguage.add(s.strip());
         }
 }

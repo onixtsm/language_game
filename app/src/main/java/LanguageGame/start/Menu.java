@@ -39,7 +39,7 @@ public class Menu {
                         try {
                                 int option = scanner.nextInt();
                                 if (checkInput(option)) {
-                                        this.mode = option;
+                                        this.wt = option;
                                         break;
                                 }
                         } catch (InputMismatchException e) {

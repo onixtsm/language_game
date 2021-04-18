@@ -18,20 +18,35 @@ public class Output {
                 return list.get(num);
         }
 
-        private void question(WordTranslationDataType dt) {
-                String rus = dt.getSourceLanguage();
+        private void question(WordTranslationDataType dt, Menu options) {
+                List<String> rus = new ArrayList<String>();
                 List<String> eng = new ArrayList<String>();
                 List<String> wt = new ArrayList<String>();
 
+                rus = dt.getSourceLanguage();
                 eng = dt.getTranslationLanguage();
                 wt = dt.getWordType();
 
+               if (options.getMode() == 1) {
+                        checkWord(rus, eng);
+
+                } else {
+                        checkWord(eng, rus);
+                }
+                if (options.getWt() == 1) {
+                        checkWt(wt);
+                }
+
+        }
+
+        private void checkWord(List<String> def, List<String> ans) {
+                Random r = new Random();
                 var userAnswer = new HashSet<String>();
                 Scanner scanner = ScannerSingleton.getInstance();
                 String answer;
-                while (eng.size() > userAnswer.size()) {
+                while (ans.size() > userAnswer.size()) {
 
-                        System.out.println("Translate this word - " + rus);
+                        System.out.println("Translate this word - " + def.get(r.nextInt(def.size())));
                         answer = scanner.nextLine();
                         System.out.println(answer);
 
@@ -40,7 +55,7 @@ public class Output {
                                 continue;
                         }
 
-                        if (eng.contains(answer)) {
+                        if (ans.contains(answer)) {
                                 userAnswer.add(answer);
                                 System.out.println("Correct");
                         } else {
@@ -48,18 +63,44 @@ public class Output {
                                 return;
                         }
                 }
-
         }
 
-        public void asklisted(List<WordTranslationDataType> list) {
-                for (WordTranslationDataType s : list) {
-                        question(s);
+        private void checkWt(List<String> wt) {
+                var userAnswer = new HashSet<String>();
+                Scanner scanner = ScannerSingleton.getInstance();
+                String answer;
+                while (wt.size() > userAnswer.size()) {
+
+                        System.out.println("Write word type");
+                        answer = scanner.nextLine();
+                        System.out.println(answer);
+
+                        if (userAnswer.contains(answer)) {
+                                System.out.println("Duplicate!");
+                                continue;
+                        }
+
+                        if (wt.contains(answer)) {
+                                userAnswer.add(answer);
+                                System.out.println("Correct");
+                        } else {
+                                System.out.println("Incorrect");
+                                return;
+                        }
                 }
         }
 
-        public void askRandom(List<WordTranslationDataType> list) {
+        public void askListed(List<WordTranslationDataType> list, Menu options) {
+                for (var s : list) {
+                        System.out.println(s);
+                        question(s, options);
+                }
+
+        }
+
+        public void askRandom(List<WordTranslationDataType> list, Menu options) {
                 var dt = random(list);
-                question(dt);
+                question(dt, options);
         }
 
 }
