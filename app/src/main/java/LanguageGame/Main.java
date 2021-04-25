@@ -18,11 +18,11 @@ public class Main {
                 var file = Main.class.getClassLoader().getResource("words.csv").getFile();
                 var list = parser.parseFile(new File(file));
 
-                // for (WordTranslationDataType data : list) {
-                // System.out.println(data);
-                // }
                 var writer = new Output();
-                writer.askListed(list, start);
+                for (int i = 0; i < start.getLength(); i++) {
+                        writer.askRandom(list, start);
+                }
+                System.out.printf("You answerd %d out of %d", writer.getCorrect(), start.getLength());
 
         }
 }
